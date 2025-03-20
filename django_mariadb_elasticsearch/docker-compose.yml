@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+    container_name: ${CONTAINER_NAME}
+    restart: always
+    volumes:
+      - ./data:/${DIRECTORY}
+    ports:
+      - "${SSH_PORT}:22"
+      - "${DJANGO_PORT}:8000"
+    networks:
+      - default
+
+          
+  maria:
+    image: mariadb:latest
+    container_name: ${CONTAINER_DBNAME}
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./scripts/my.cnf:/etc/mysql/my.cnf         ### nastavení databaze
+    ports:
+      - "${DB_PORT}:3306"
+    networks:
+      - default
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    container_name: ${CONTAINER_ELASTIC}
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}  # Nastavení hesla
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - default
+    restart: always
+
+networks:
+  default:
+    name: ${NETWORK_NAME}
+    driver: bridge
+
+volumes:
+  elasticsearch_data:
+    driver: local
