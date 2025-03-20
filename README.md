@@ -108,5 +108,43 @@ docker exec -it magic_django cat /div_app/nohup.out
 
 ---
 
+## Správa Docker sítí
+
+### Seznam sítí
+```sh
+docker network ls
+```
+
+### Inspekce konkrétní sítě
+```sh
+docker network inspect <nazev_site>
+```
+
+### Volání mezi kontejnery ve stejné síti
+V Docker síti se kontejnery mohou oslovovat pomocí jejich názvu z `docker-compose.yml` nebo `.env` .
+Například pokud máš kontejner `magic_django` a chceš se připojit k databázi `magic_db`, použiješ `magic_db` místo IP adresy.
+Toto platí jak v terminálu, tak např. v `settings.py` v Django projektu
+
+**Příklad v aplikaci:**
+```sh
+mysql -h magic_db -u root -p
+```
+
+---
+
+## Monitorování využití zdrojů
+
+### Zobrazení statistik všech běžících kontejnerů
+```sh
+docker stats
+```
+
+### Zobrazení statistik konkrétního kontejneru
+```sh
+docker stats <container_name>
+```
+
+---
+
 Tento dokument slouží jako základní referenční příručka pro práci s Dockerem a Docker Compose.
 
