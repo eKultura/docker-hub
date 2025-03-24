@@ -22,7 +22,7 @@ RUN mkdir /var/run/sshd && \
 
 # Instalace Python balíků
 COPY ./data/requirements.txt /div_app/
-RUN pip install --no-cache-dir -r div_app/requirements.txt django-elasticsearch-dsl
+RUN pip install --no-cache-dir -r div_app/requirements.txt django-elasticsearch-dsl ### gunicorn
 
 # Kopírování entrypoint skriptu
 COPY entrypoint.sh /entrypoint.sh

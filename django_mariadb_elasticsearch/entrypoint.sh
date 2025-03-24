@@ -18,5 +18,9 @@ sleep 15
 echo "Spouštím django server"
 nohup python manage.py runserver 0.0.0.0:8000 > django.log 2>&1 &
 
+# echo "Spoustim gunicorn"
+# exec gunicorn --workers 4 --threads 2 --bind 0.0.0.0:8000 --reload config.wsgi:application 
+# Alternativa spousteni pres gunicorn
+
 # Přesměrování logů do výstupu, aby se docker nevypl, pokud vypneme nohup
 tail -f django.log
