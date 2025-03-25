@@ -1,3 +1,6 @@
+# Docker-hub eKultura
+Pro potřeby projektů v rámci neziskové organizace eKultura používáme system kontejnerů.
+
 # Docker Commands Cheat Sheet
 
 Tento dokument obsahuje základní příkazy pro práci s Dockerem a Docker Compose.
@@ -81,7 +84,7 @@ docker logs magic_django --tail 100 -f
 
 ## Spouštění příkazů uvnitř kontejnerů
 
-### Otevření terminálu v běžícím kontejneru
+### Otevření terminálu v běžícím kontejneru (vstup do kontejneru)
 ```sh
 docker exec -it <container_name> bash
 ```
