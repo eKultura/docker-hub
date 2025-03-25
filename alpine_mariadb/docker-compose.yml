@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: ${CONTAINER_NAME} 
+    build:
+      context: .
+    volumes:
+      - ./data:/${DIRECTORY}
+    ports:
+      - "${SSH_PORT}:22"
+    restart: always
+    networks:
+      - default
+
+  maria:
+    image: mariadb:latest
+    container_name: ${CONTAINER_DBNAME}
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - "${DB_PORT}:3306"
+    networks:
+      - default
+
+networks:
+  default:
+    name: ${NETWORK_NAME}
+    driver: bridge
+
+
+          
+    
