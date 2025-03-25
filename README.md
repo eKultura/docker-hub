@@ -30,7 +30,10 @@ docker-compose up -d
 ```sh
 docker-compose down
 ```
-
+### Restart kontejneru
+```sh
+docker restart <container_name>
+```
 ### Zastavení konkrétního kontejneru
 ```sh
 docker stop <container_name>
